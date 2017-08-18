@@ -11,7 +11,17 @@
 #' size - number of particles, \cr
 #' min, max - minimum and maximum value of velocity and position, \cr 
 #' 
-#' Example: \cr
+#' @import stats
+#' @import testthat
+#' 
+#' @param size a number.
+#' @param dim a number.
+#' @param min a number.
+#' @param max a number.
+#' 
+#' @return a list.
+#' 
+#' @examples
 #' PSO <- psopt:::pso_function(50, 2, 0, 10)
 
 pso_function <- function(size, dim, min, max){
@@ -65,7 +75,10 @@ pso_function <- function(size, dim, min, max){
       current_fitness = schaffer(SWARM[i, c(1,2)])
       if (current_fitness < FITNESS[i]) {
         FITNESS[i] = current_fitness
-        personal_best[i] = SWARM[i, c(1,2)]
+        # 
+        personal_best[i,1] = SWARM[i, 1]
+        personal_best[i,2] = SWARM[i, 2]
+        
       }
     }
 
@@ -91,7 +104,10 @@ pso_function <- function(size, dim, min, max){
 #' More function you can find here - \cr 
 #' \url{https://en.wikipedia.org/wiki/Test_functions_for_optimization}
 #' 
-#' Example: \cr
+#' @param x two dimensional vector.
+#' @return a value of schaffer function
+#' 
+#' @examples
 #' psopt:::schaffer(c(0,0))
 
 schaffer = function(x){
@@ -106,8 +122,13 @@ schaffer = function(x){
 #' explore the space of possible solutions, to find the best solution. \cr
 #' It should be called after calling pso_function.
 #' 
-#' Example: \cr
-#' PSO <- psopt:::pso_function(50, 2, 0, 10) \cr
+#' @import graphics 
+#' 
+#' @param PSO a list.
+#' @return a graph
+#' 
+#' @examples
+#' PSO <- psopt:::pso_function(50, 2, 0, 10)
 #' psopt:::explore_graph(PSO)
 
 explore_graph = function(PSO) {
@@ -132,8 +153,13 @@ explore_graph = function(PSO) {
 #' ech iteration of pso_function was calculated.  \cr
 #' It should be called after calling pso_function.
 #' 
-#' Example:
-#' PSO <- psopt:::pso_function(50, 2, 0, 10) \cr
+#' @import graphics 
+#' 
+#' @param PSO a list.
+#' @return a chart.
+#' 
+#' @examples
+#' PSO <- psopt:::pso_function(50, 2, 0, 10) 
 #' psopt:::iter_time(PSO)
 
 iter_time <-function(PSO){
