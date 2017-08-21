@@ -24,9 +24,9 @@
 #' @examples
 #' PSO <- psopt:::pso_function(50, 2, 0, 10)
 
-pso_function <- function(size, dim, min, max){
+pso_function = function(size, dim, min, max){
   # schaffer function
-  schaffer = function(x){
+  schaffer <- function(x){
     counter <- (sin(x[1]^2-x[2]^2)^2)-0.5
     nominative <- ( 1+0.001*(x[1]^2+x[2]^2))^2
     return( 0.5 + (counter / nominative))
@@ -67,17 +67,17 @@ pso_function <- function(size, dim, min, max){
     sk <- runif(2, 0, 1)
 
     # calculating new value of position and velocity
-    SWARM[, c(3,4)] = omega * SWARM[, c(3,4)] + c1 * rk * (personal_best[] - SWARM[, c(1,2)]) + c2 *sk * (global_best[] - SWARM[, c(1,2)] )
-    SWARM[, c(1,2)] = SWARM[, c(1,2)] + SWARM[, c(3,4)]
+    SWARM[, c(3,4)] <- omega * SWARM[, c(3,4)] + c1 * rk * (personal_best[] - SWARM[, c(1,2)]) + c2 *sk * (global_best[] - SWARM[, c(1,2)] )
+    SWARM[, c(1,2)] <- SWARM[, c(1,2)] + SWARM[, c(3,4)]
 
     # checking if we get new personal best value
     for (i in 1:size){
-      current_fitness = schaffer(SWARM[i, c(1,2)])
+      current_fitness <- schaffer(SWARM[i, c(1,2)])
       if (current_fitness < FITNESS[i]) {
-        FITNESS[i] = current_fitness
+        FITNESS[i] <- current_fitness
         # 
-        personal_best[i,1] = SWARM[i, 1]
-        personal_best[i,2] = SWARM[i, 2]
+        personal_best[i,1] <- SWARM[i, 1]
+        personal_best[i,2] <- SWARM[i, 2]
         
       }
     }
@@ -162,7 +162,7 @@ explore_graph = function(PSO) {
 #' PSO <- psopt:::pso_function(50, 2, 0, 10) 
 #' psopt:::iter_time(PSO)
 
-iter_time <-function(PSO){
+iter_time = function(PSO){
   iter_time <- data.frame(PSO[2])
   plot(iter_time$iteration_time, xlab = "iteration", ylab = "time [sec]")
 }
