@@ -25,6 +25,15 @@
 #' PSO <- psopt:::pso_function(50, 2, 0, 10)
 
 pso_function = function(size, dim, min, max){
+  if(class(size) != "numeric")
+    stop("Error: Size should be numeric")
+  if(class(dim) != "numeric")
+    stop("Error: Dim should be numeric")
+  if(class(min) != "numeric")
+    stop("Error: Min should be numeric type")
+  if(class(max) != "numeric")
+    stop("Error: Max should be numeric type")
+
   # schaffer function
   schaffer <- function(x){
     counter <- (sin(x[1]^2-x[2]^2)^2)-0.5
@@ -111,6 +120,11 @@ pso_function = function(size, dim, min, max){
 #' psopt:::schaffer(c(0,0))
 
 schaffer = function(x){
+  if(class(x) != "numeric")
+    stop("Error: x should be numeric")
+  if(length(x) != 2)
+    stop("Error: Length of x should be 2")
+
   counter <- (sin(x[1]^2-x[2]^2)^2)-0.5
   nominative <- ( 1+0.001*(x[1]^2+x[2]^2))^2
   return( 0.5 + (counter / nominative))
@@ -132,7 +146,10 @@ schaffer = function(x){
 #' psopt:::explore_graph(PSO)
 
 explore_graph = function(PSO) {
-
+  if(class(PSO) != "list")
+    stop("Error: Argument should be list")
+  if(length(PSO) != 2)
+    stop("Error: Length of argument should be 2")
   history <- PSO[1]
   output <- matrix(unlist(history), ncol = 2, byrow = TRUE)
   n_grid=100
@@ -163,6 +180,10 @@ explore_graph = function(PSO) {
 #' psopt:::iter_time(PSO)
 
 iter_time = function(PSO){
+  if(class(PSO) != "list")
+    stop("Error: Argument should be list")
+  if(length(PSO) != 2)
+    stop("Error: Length of argument should be 2")
   iter_time <- data.frame(PSO[2])
   plot(iter_time$iteration_time, xlab = "iteration", ylab = "time [sec]")
 }
